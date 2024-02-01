@@ -26,7 +26,12 @@ const getHomeDirectory = () => {
     console.log(`Home directory: ${homeDirectory}`)
 }
 
+const getSystemUsername = () => {
+    const systemUsername = process.env.USER || process.env.USERNAME
+    console.log(`Current System User Name: ${systemUsername}`);
+}
+
 
 export {
-    getEOL, cpus, getHomeDirectory
+    getEOL, cpus, getHomeDirectory, getSystemUsername
 }
