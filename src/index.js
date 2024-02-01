@@ -3,6 +3,7 @@ import { up, ls } from "./navigation/navigation.js";
 import readline from 'readline';
 import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
 import { getEOL, cpus, getHomeDirectory, getSystemUsername, getCPUArchitecture } from "./os/os.js";
+import { hash } from "./hash/hash.js";
 
 const run = () => {
 
@@ -102,6 +103,10 @@ const run = () => {
                 } else if (requestType === "--architecture") {
                     getCPUArchitecture()
                 }
+            } else if (userInput.startsWith("hash")) {
+                const pathToFile = userInput.split(" ")[1];
+                const urlToFile = `${currentDirectory}\\${pathToFile}`;
+                hash(urlToFile)
             }
         })
 
