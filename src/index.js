@@ -2,6 +2,7 @@ import * as os from "os";
 import { up, ls } from "./navigation/navigation.js";
 import readline from 'readline';
 import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
+import { getEOL } from "./os/os.js";
 
 const run = () => {
 
@@ -88,6 +89,11 @@ const run = () => {
                 const urlToFile = `${currentDirectory}\\${pathToFile}`;
                 rm(urlToFile)
                 currentLocation()
+            } else if (userInput.startsWith("os")) {
+                const requestType = userInput.split(" ")[1]
+                if (requestType === "--EOL") {
+                    getEOL()
+                }
             }
         })
 
