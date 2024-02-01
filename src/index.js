@@ -1,11 +1,12 @@
 import * as os from "os";
-import { up, ls } from "./navigation/navigation.js";
+import { up, ls, cd } from "./navigation/navigation.js";
 import readline from 'readline';
 import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
 import { getEOL, cpus, getHomeDirectory, getSystemUsername, getCPUArchitecture } from "./os/os.js";
 import { hash } from "./hash/hash.js";
 import compress from "./zip/compress.js";
 import decompress from "./zip/decompress.js";
+import path from 'path'
 
 const run = () => {
 
@@ -23,7 +24,8 @@ const run = () => {
     });
 
     const currentLocation = () => {
-        process.stdout.write(`You are currently in ${currentDirectory}\n`);
+        const absolutePath = path.resolve(currentDirectory);
+        process.stdout.write(`You are currently in ${absolutePath}\n`);
     }
 
     if (username) {
@@ -53,6 +55,8 @@ const run = () => {
                 case "ls":
                     ls(currentDirectory);
                     currentLocation()
+
+
             }
 
             if (userInput.startsWith("cat")) {
@@ -60,6 +64,15 @@ const run = () => {
                 const pathToFile = `${currentDirectory}\\${fileName}`
                 cat(pathToFile)
                 currentLocation()
+            } else if (userInput.startsWith("cd")) {
+                const newPath = userInput.match(/^cd\s(.+)/)[1];
+
+                if (await cd(currentDirectory, newPath)) {
+                    currentDirectory = process.cwd(); // Update currentDirectory to the new absolute path
+                }
+                currentLocation();
+
+
             } else if (userInput.startsWith('add')) {
                 const fileName = userInput.split(" ")[1];
                 const pathToFile = `${currentDirectory}\\${fileName}`
