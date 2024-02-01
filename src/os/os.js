@@ -1,4 +1,5 @@
 import os from 'os';
+import process from 'process'
 
 
 const getEOL = () => {
@@ -31,7 +32,16 @@ const getSystemUsername = () => {
     console.log(`Current System User Name: ${systemUsername}`);
 }
 
+const getCPUArchitecture = () => {
+    const cpuArchitecture = process.arch;
+    console.log(`Node.js Binary CPU Architecture: ${cpuArchitecture}`);
+}
+
 
 export {
-    getEOL, cpus, getHomeDirectory, getSystemUsername
+    getEOL,
+    cpus,
+    getHomeDirectory,
+    getSystemUsername,
+    getCPUArchitecture
 }

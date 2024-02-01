@@ -2,7 +2,7 @@ import * as os from "os";
 import { up, ls } from "./navigation/navigation.js";
 import readline from 'readline';
 import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
-import { getEOL, cpus, getHomeDirectory, getSystemUsername } from "./os/os.js";
+import { getEOL, cpus, getHomeDirectory, getSystemUsername, getCPUArchitecture } from "./os/os.js";
 
 const run = () => {
 
@@ -99,6 +99,8 @@ const run = () => {
                     getHomeDirectory()
                 } else if (requestType === "--username") {
                     getSystemUsername()
+                } else if (requestType === "--architecture") {
+                    getCPUArchitecture()
                 }
             }
         })
