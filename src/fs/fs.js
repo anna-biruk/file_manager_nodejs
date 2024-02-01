@@ -51,11 +51,39 @@ const cp = async (pathToFile, pathToNewDirectory) => {
         });
     } else {
         // Copy the file to the new directory
-        const readableStream = fs.createReadStream(pathToFile, 'utf-8');
-        const writableStream = fs.createWriteStream(path.join(pathToNewDirectory, path.basename(pathToFile)));
-        readableStream.pipe(writableStream);
+        const sourceStream = fs.createReadStream(pathToFile, 'utf-8');
+        const destinationStream = fs.createWriteStream(path.join(pathToNewDirectory, path.basename(pathToFile)));
+        sourceStream.pipe(destinationStream);
+
     }
-    console.log("File has been copied succesfully")
+    console.log("The file has been copied successfully")
+
 }
 
-export { cat, add, rn, cp }
+const mv = async (pathToFile, pathToNewDirectory) => {
+    if (pathToFile === undefined) {
+        console.log('Path to file has not been set');
+        return;
+    }
+    if (pathToNewDirectory === undefined) {
+        console.log('Path to new directory has not been set');
+        return;
+    }
+
+    const sourceStream = fs.createReadStream(pathToFile);
+    const destinationPath = path.join(pathToNewDirectory, path.basename(pathToFile));
+    const destinationStream = fs.createWriteStream(destinationPath);
+
+    sourceStream.pipe(destinationStream);
+
+    sourceStream.on('end', () => {
+        fs.unlinkSync(pathToFile);
+        console.log(`File moved from ${pathToFile} to ${destinationPath}`);
+    });
+
+    sourceStream.on('error', (err) => {
+        console.error(`Error moving file: ${err.message}`);
+    });
+}
+
+export { cat, add, rn, cp, mv }
