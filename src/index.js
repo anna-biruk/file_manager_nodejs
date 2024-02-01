@@ -1,7 +1,7 @@
 import * as os from "os";
 import { up, ls } from "./navigation/navigation.js";
 import readline from 'readline';
-import { cat, add, rn } from "./fs/fs.js";
+import { cat, add, rn, cp } from "./fs/fs.js";
 
 const run = () => {
 
@@ -69,6 +69,12 @@ const run = () => {
                 const newPath = `${currentDirectory}\\${newFileName}`;
                 rn(oldPath, newPath);
                 currentLocation();
+            } else if (userInput.startsWith('cp')) {
+                const pathToFile = userInput.split(" ")[1];
+                const pathToNewDirectory = userInput.split(" ")[2];
+                const urlToFile = `${currentDirectory}\\${pathToFile}`;
+                const urlToNewDirectory = `${currentDirectory}\\${pathToNewDirectory}`;
+                cp(urlToFile, urlToNewDirectory)
             }
         })
 
