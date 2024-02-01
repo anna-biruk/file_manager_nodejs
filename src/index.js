@@ -1,7 +1,7 @@
 import * as os from "os";
 import { up, ls } from "./navigation/navigation.js";
 import readline from 'readline';
-import { cat, add, rn, cp, mv } from "./fs/fs.js";
+import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
 
 const run = () => {
 
@@ -75,12 +75,19 @@ const run = () => {
                 const urlToFile = `${currentDirectory}\\${pathToFile}`;
                 const urlToNewDirectory = `${currentDirectory}\\${pathToNewDirectory}`;
                 cp(urlToFile, urlToNewDirectory)
+                currentLocation()
             } else if (userInput.startsWith('mv')) {
                 const pathToFile = userInput.split(" ")[1];
                 const pathToNewDirectory = userInput.split(" ")[2];
                 const urlToFile = `${currentDirectory}\\${pathToFile}`;
                 const urlToNewDirectory = `${currentDirectory}\\${pathToNewDirectory}`;
                 mv(urlToFile, urlToNewDirectory)
+                currentLocation()
+            } else if (userInput.startsWith("rm")) {
+                const pathToFile = userInput.split(" ")[1]
+                const urlToFile = `${currentDirectory}\\${pathToFile}`;
+                rm(urlToFile)
+                currentLocation()
             }
         })
 

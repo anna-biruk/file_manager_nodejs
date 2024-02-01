@@ -2,6 +2,10 @@ import fs from 'fs';
 import path from 'path'
 
 const cat = async (filePath) => {
+    if (filePath === undefined) {
+        console.log('Path to file has not been set');
+        return;
+    }
     const readableStream = fs.createReadStream(filePath, 'utf-8');
 
     readableStream.on('data', (chunk) => {
@@ -14,6 +18,10 @@ const cat = async (filePath) => {
 }
 
 const add = async (filePath) => {
+    if (filePath === undefined) {
+        console.log('Path to file has not been set');
+        return;
+    }
     await fs.promises.writeFile(filePath, "", (err) => {
         if (err) {
             console.error(err)
@@ -86,4 +94,19 @@ const mv = async (pathToFile, pathToNewDirectory) => {
     });
 }
 
-export { cat, add, rn, cp, mv }
+const rm = async (pathToFile) => {
+    if (pathToFile === undefined) {
+        console.log('Path to file has not been set');
+        return;
+    }
+
+    fs.unlink(pathToFile, (err) => {
+        if (err) {
+            console.log(`Error deleting file:${err}`)
+        } else {
+            console.log("File deleted")
+        }
+    })
+}
+
+export { cat, add, rn, cp, mv, rm }
