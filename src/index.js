@@ -4,6 +4,7 @@ import readline from 'readline';
 import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
 import { getEOL, cpus, getHomeDirectory, getSystemUsername, getCPUArchitecture } from "./os/os.js";
 import { hash } from "./hash/hash.js";
+import compress from "./zip/compress.js";
 
 const run = () => {
 
@@ -107,6 +108,12 @@ const run = () => {
                 const pathToFile = userInput.split(" ")[1];
                 const urlToFile = `${currentDirectory}\\${pathToFile}`;
                 hash(urlToFile)
+            } else if (userInput.startsWith("compress")) {
+                const pathToFile = userInput.split(" ")[1]
+                const pathToDestination = userInput.split(" ")[2]
+                const urlToFile = `${currentDirectory}\\${pathToFile}`;
+                const urlToDestination = `${currentDirectory}\\${pathToDestination}`;
+                compress(urlToFile, urlToDestination)
             }
         })
 
