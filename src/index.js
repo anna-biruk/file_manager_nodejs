@@ -2,7 +2,7 @@ import * as os from "os";
 import { up, ls } from "./navigation/navigation.js";
 import readline from 'readline';
 import { cat, add, rn, cp, mv, rm } from "./fs/fs.js";
-import { getEOL, cpus } from "./os/os.js";
+import { getEOL, cpus, getHomeDirectory } from "./os/os.js";
 
 const run = () => {
 
@@ -95,6 +95,8 @@ const run = () => {
                     getEOL()
                 } else if (requestType === "--cpus") {
                     cpus()
+                } else if (requestType === "--homedir") {
+                    getHomeDirectory()
                 }
             }
         })

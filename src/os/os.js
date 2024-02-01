@@ -19,6 +19,14 @@ const cpus = () => {
         console.log(`  Model: ${model}`);
         console.log(`  Clock Rate: ${speedInGHz} GHz\n`);
     });
-
 }
-export { getEOL, cpus }
+
+const getHomeDirectory = () => {
+    const homeDirectory = os.homedir();
+    console.log(`Home directory: ${homeDirectory}`)
+}
+
+
+export {
+    getEOL, cpus, getHomeDirectory
+}
