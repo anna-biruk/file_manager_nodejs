@@ -21,5 +21,11 @@ const add = async (filePath) => {
     });
     console.log('File is created successfully.');
 }
+const rn = async (oldName, newName) => {
+    fs.rename(oldName, newName, () => {
+        console.log('File renamed')
+    })
 
-export { cat, add }
+}
+
+export { cat, add, rn }
